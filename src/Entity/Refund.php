@@ -56,7 +56,7 @@ class Refund implements RefundInterface
 
     public function getAmount(): int
     {
-        return $this->amount;
+        return (int) $this->amount;
     }
 
     public function getRefundedUnitId(): int

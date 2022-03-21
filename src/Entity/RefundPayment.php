@@ -64,7 +64,7 @@ class RefundPayment implements RefundPaymentInterface
 
     public function getAmount(): int
     {
-        return $this->amount;
+        return (int) $this->amount;
     }
 
     public function getCurrencyCode(): string
