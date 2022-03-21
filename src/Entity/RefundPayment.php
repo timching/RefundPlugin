@@ -38,7 +38,9 @@ class RefundPayment implements RefundPaymentInterface
         PaymentMethodInterface $paymentMethod
     ) {
         $this->order = $order;
-        $this->amount = (int) $amount;
+        if (is_numeric($amount)) {
+            $this->amount = (int) $amount > PHP_INT_MAX ? PHP_INT_MAX : (int) $amount;
+        }
         $this->currencyCode = $currencyCode;
         $this->state = $state;
         $this->paymentMethod = $paymentMethod;
