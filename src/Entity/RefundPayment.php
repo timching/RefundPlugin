@@ -22,7 +22,7 @@ class RefundPayment implements RefundPaymentInterface
 
     protected OrderInterface $order;
 
-    protected int $amount;
+    protected $amount;
 
     protected string $currencyCode;
 

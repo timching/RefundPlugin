@@ -22,7 +22,7 @@ class Refund implements RefundInterface
 
     protected OrderInterface $order;
 
-    protected int $amount;
+    protected $amount;
 
     protected int $refundedUnitId;
 
