@@ -22,7 +22,7 @@ class RefundPayment implements RefundPaymentInterface
 
     protected OrderInterface $order;
 
-    protected int $amount;
+    protected $amount;
 
     protected string $currencyCode;
 
@@ -32,13 +32,15 @@ class RefundPayment implements RefundPaymentInterface
 
     public function __construct(
         OrderInterface $order,
-        int $amount,
+        $amount,
         string $currencyCode,
         string $state,
         PaymentMethodInterface $paymentMethod
     ) {
         $this->order = $order;
-        $this->amount = $amount;
+        if (is_numeric($amount)) {
+            $this->amount = (int) $amount > PHP_INT_MAX ? PHP_INT_MAX : (int) $amount;
+        }
         $this->currencyCode = $currencyCode;
         $this->state = $state;
         $this->paymentMethod = $paymentMethod;
@@ -62,7 +64,7 @@ class RefundPayment implements RefundPaymentInterface
 
     public function getAmount(): int
     {
-        return $this->amount;
+        return (int) $this->amount;
     }
 
     public function getCurrencyCode(): string

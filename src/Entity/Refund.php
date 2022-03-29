@@ -22,16 +22,18 @@ class Refund implements RefundInterface
 
     protected OrderInterface $order;
 
-    protected int $amount;
+    protected $amount;
 
     protected int $refundedUnitId;
 
     protected RefundTypeInterface $type;
 
-    public function __construct(OrderInterface $order, int $amount, int $refundedUnitId, RefundTypeInterface $type)
+    public function __construct(OrderInterface $order, $amount, int $refundedUnitId, RefundTypeInterface $type)
     {
         $this->order = $order;
-        $this->amount = $amount;
+        if (is_numeric($amount)) {
+            $this->amount = (int) $amount > PHP_INT_MAX ? PHP_INT_MAX : (int) $amount;
+        }
         $this->refundedUnitId = $refundedUnitId;
         $this->type = $type;
     }
@@ -54,7 +56,7 @@ class Refund implements RefundInterface
 
     public function getAmount(): int
     {
-        return $this->amount;
+        return (int) $this->amount;
     }
 
     public function getRefundedUnitId(): int
